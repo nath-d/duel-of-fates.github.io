@@ -38,7 +38,7 @@ const player = new Sprite({
     },
     velocity: {
         x: 0,
-        y: 10
+        y: 0
     }
 })
 
@@ -46,7 +46,7 @@ const player = new Sprite({
 const enemy = new Sprite({
     position: {
         x: 400,
-        y: 100
+        y: 0
     },
     velocity: {
         x: 0,
@@ -64,4 +64,6 @@ function animate() {
     enemy.update()
 }
 animate() //creates a loop
+
+
 
