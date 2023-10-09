@@ -114,7 +114,7 @@ function animate() {
     }
 
 }
-//creates a loop
+
 
 window.addEventListener('keydown', (event) => {
     switch (event.key) {
@@ -170,7 +170,7 @@ window.addEventListener('keyup', (event) => {
 
     }
 })
-animate()
+animate() //creates a loop
 
 
 
