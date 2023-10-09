@@ -4,11 +4,11 @@ const c = canvas.getContext('2d')
 canvas.width = 1024
 canvas.height = 576
 
-c.fillRect(0, 0, canvas.width, canvas.height) //takes arguments (x position, y position, width, height) 
+c.fillRect(0, 0, canvas.width, canvas.height)
 
 const gravity = 0.7
 
-class Sprite {
+class Fighter {
     constructor({ position, velocity, color = 'blue' }) {
         this.position = position
         this.velocity = velocity
@@ -46,9 +46,9 @@ class Sprite {
     }
 }
 
-const player = new Sprite({
+const player = new Fighter({
     position: {
-        x: 100,
+        x: 0,
         y: 0
     },
     velocity: {
@@ -57,19 +57,20 @@ const player = new Sprite({
     },
 })
 
-
-const enemy = new Sprite({
+const enemy = new Fighter({
     position: {
-        x: 874,
-        y: 0
+        x: 400,
+        y: 100
     },
     velocity: {
         x: 0,
         y: 0
     },
-    color: 'red'
+    color: 'blue',
+
 })
 
+console.log(player)
 
 const keys = {
     a: {
@@ -78,10 +79,10 @@ const keys = {
     d: {
         pressed: false
     },
-    ArrowLeft: {
+    ArrowRight: {
         pressed: false
     },
-    ArrowRight: {
+    ArrowLeft: {
         pressed: false
     }
 }
@@ -93,33 +94,42 @@ function animate() {
     c.fillStyle = 'black'
     c.fillRect(0, 0, canvas.width, canvas.height)
 
+
+    c.fillStyle = 'rgba(255, 255, 255, 0.15)'
+    c.fillRect(0, 0, canvas.width, canvas.height)
     player.update()
     enemy.update()
 
     player.velocity.x = 0
     enemy.velocity.x = 0
-    //Stops moving player for every frame
 
+    // player movement
 
     if (keys.a.pressed && player.lastKey === 'a') {
-        player.velocity.x = -4
+        player.velocity.x = -5
 
     } else if (keys.d.pressed && player.lastKey === 'd') {
-        player.velocity.x = 4
+        player.velocity.x = 5
+
     }
 
+
+
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
-        enemy.velocity.x = -4
+        enemy.velocity.x = -5
+
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
-        enemy.velocity.x = 4
+        enemy.velocity.x = 5
+
     }
+
 
 }
 
 animate()
 
-
 window.addEventListener('keydown', (event) => {
+
     switch (event.key) {
         case 'd':
             keys.d.pressed = true
@@ -131,6 +141,9 @@ window.addEventListener('keydown', (event) => {
             break
         case 'w':
             player.velocity.y = -20
+            break
+        case ' ':
+            player.attack()
             break
     }
     switch (event.key) {
@@ -145,9 +158,11 @@ window.addEventListener('keydown', (event) => {
         case 'ArrowUp':
             enemy.velocity.y = -20
             break
+        case 'ArrowDown':
+            enemy.attack()
 
+            break
     }
-
 })
 
 window.addEventListener('keyup', (event) => {
@@ -160,19 +175,11 @@ window.addEventListener('keyup', (event) => {
             break
     }
     switch (event.key) {
-        case 'ArrowLeft':
-            keys.ArrowLeft.pressed = false
-            break
-
-
         case 'ArrowRight':
             keys.ArrowRight.pressed = false
             break
+        case 'ArrowLeft':
+            keys.ArrowLeft.pressed = false
+            break
     }
 })
-//creates a loop
-
-
-
-
-
