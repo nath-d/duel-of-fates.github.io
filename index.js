@@ -16,7 +16,7 @@ const background1 = new Sprite({
     imageSrc: './img/parallax-mountain-bg.png',
     scale: 3.8
 })
-const background2 = new Sprite({
+const background5 = new Sprite({
     position: {
         x: 0,
         y: -6
@@ -32,7 +32,7 @@ const background3 = new Sprite({
     imageSrc: './img/parallax-mountain-montain-far.png',
     scale: 3
 })
-const background4 = new Sprite({
+const background2 = new Sprite({
     position: {
         x: 0,
         y: 0
@@ -41,7 +41,7 @@ const background4 = new Sprite({
     scale: 3.3
 })
 
-const background5 = new Sprite({
+const background7 = new Sprite({
     position: {
         x: 0,
         y: -305
@@ -49,7 +49,7 @@ const background5 = new Sprite({
     imageSrc: './img/Layer_0000_9.png',
     scale: 1.11
 })
-const background6 = new Sprite({
+const background4 = new Sprite({
     position: {
         x: 0,
         y: 50
@@ -57,7 +57,7 @@ const background6 = new Sprite({
     imageSrc: './img/parallax-mountain-trees.png',
     scale: 3
 })
-const background7 = new Sprite({
+const background6 = new Sprite({
     position: {
         x: 0,
         y: -305
@@ -162,12 +162,12 @@ function animate() {
     c.fillStyle = 'black'
     c.fillRect(0, 0, canvas.width, canvas.height)
     background1.update()
-    background4.update()
-    background3.update()
-    background6.update()
     background2.update()
-    background7.update()
+    background3.update()
+    background4.update()
     background5.update()
+    background6.update()
+    background7.update()
 
     player.update()
     enemy.update()
