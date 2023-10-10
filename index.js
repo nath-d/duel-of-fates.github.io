@@ -15,6 +15,7 @@ class Sprite {
         this.height = 150
         this.width = 50
         this.lastKey
+        this.health = 100
         this.attackBox = {
             position: {
                 x: this.position.x,
@@ -181,6 +182,8 @@ function animate() {
         player.isAttacking) {
 
         player.isAttacking = false
+        enemy.health -= 20
+        document.querySelector('#enemyHealth').style.width = enemy.health + '%'
         console.log("player attack")
     }
     if (collision({
@@ -190,6 +193,8 @@ function animate() {
         enemy.isAttacking) {
 
         enemy.isAttacking = false
+        player.health -= 20
+        document.querySelector('#playerHealth').style.width = player.health + '%'
         console.log("enemy attack")
     }
 
