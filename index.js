@@ -13,6 +13,7 @@ class Sprite {
         this.position = position
         this.velocity = velocity
         this.height = 150
+        this.width = 50
         this.lastKey
         this.attackBox = {
             position: this.position,
@@ -25,7 +26,7 @@ class Sprite {
 
     draw() {
         c.fillStyle = this.color
-        c.fillRect(this.position.x, this.position.y, 50, this.height) //draws a player on the screen with arguments from player object
+        c.fillRect(this.position.x, this.position.y, this.width, this.height) //draws a player on the screen with arguments from player object
 
         //attack box
         c.fillStyle = 'white'
@@ -42,6 +43,11 @@ class Sprite {
             this.velocity.y = 0
         } else
             this.velocity.y += gravity
+        // console.log(player.position.x)
+
+
+
+
 
     }
 }
@@ -96,23 +102,41 @@ function animate() {
     player.update()
     enemy.update()
 
+
+
+
     player.velocity.x = 0
     enemy.velocity.x = 0
     //Stops moving player for every frame
 
 
+
+
+
     if (keys.a.pressed && player.lastKey === 'a') {
-        player.velocity.x = -4
+        player.velocity.x = -5
 
     } else if (keys.d.pressed && player.lastKey === 'd') {
-        player.velocity.x = 4
+        player.velocity.x = 5
     }
 
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
-        enemy.velocity.x = -4
+        enemy.velocity.x = -5
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
-        enemy.velocity.x = 4
+        enemy.velocity.x = 5
     }
+    if (player.position.x >= canvas.width - player.width) {
+        player.position.x = canvas.width - player.width
+    }
+    if (enemy.position.x >= canvas.width - enemy.width) {
+        enemy.position.x = canvas.width - enemy.width
+    }
+
+
+
+
+    //collisin detection
+
 
 }
 
@@ -163,14 +187,11 @@ window.addEventListener('keyup', (event) => {
         case 'ArrowLeft':
             keys.ArrowLeft.pressed = false
             break
-
-
         case 'ArrowRight':
             keys.ArrowRight.pressed = false
             break
     }
 })
-//creates a loop
 
 
 
