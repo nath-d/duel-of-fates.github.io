@@ -157,16 +157,20 @@ function animate() {
     //player movement
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
+        player.attackBox.offset.x = -50
 
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
+        player.attackBox.offset.x = player.width - 50
     }
 
     //enemy movement
     if (keys.j.pressed && enemy.lastKey === 'j') {
         enemy.velocity.x = -5
+        enemy.attackBox.offset.x = -50
     } else if (keys.l.pressed && enemy.lastKey === 'l') {
         enemy.velocity.x = 5
+        enemy.attackBox.offset.x = enemy.width - 50
     }
 
     //attack collision 
