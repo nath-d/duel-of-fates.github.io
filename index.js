@@ -41,14 +41,21 @@ class Sprite {
 
         if (this.position.y + this.height + this.velocity.y >= canvas.height) {     //stops player from going beyond canvas height
             this.velocity.y = 0
-        } else
+        } else {
             this.velocity.y += gravity
-        // console.log(player.position.x)
-
-
-
-
-
+        }
+        if (player.position.x >= canvas.width - player.width) {
+            player.position.x = canvas.width - player.width
+        }
+        if (enemy.position.x >= canvas.width - enemy.width) {
+            enemy.position.x = canvas.width - enemy.width
+        }
+        if (player.position.x <= 0) {
+            player.position.x = 0
+        }
+        if (enemy.position.x <= 0) {
+            enemy.position.x = 0
+        }
     }
 }
 
@@ -102,16 +109,8 @@ function animate() {
     player.update()
     enemy.update()
 
-
-
-
     player.velocity.x = 0
-    enemy.velocity.x = 0
-    //Stops moving player for every frame
-
-
-
-
+    enemy.velocity.x = 0    //Stops moving player for every frame
 
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
@@ -125,23 +124,11 @@ function animate() {
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5
     }
-    if (player.position.x >= canvas.width - player.width) {
-        player.position.x = canvas.width - player.width
-    }
-    if (enemy.position.x >= canvas.width - enemy.width) {
-        enemy.position.x = canvas.width - enemy.width
-    }
-
-
-
-
-    //collisin detection
 
 
 }
 
 animate()
-
 
 window.addEventListener('keydown', (event) => {
     switch (event.key) {
@@ -192,8 +179,3 @@ window.addEventListener('keyup', (event) => {
             break
     }
 })
-
-
-
-
-
