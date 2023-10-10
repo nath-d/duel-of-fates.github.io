@@ -8,84 +8,69 @@ c.fillRect(0, 0, canvas.width, canvas.height) //takes arguments (x position, y p
 
 const gravity = 0.7
 
-class Sprite {
-    constructor({ position, velocity, color = 'blue', offset }) {
-        this.position = position
-        this.velocity = velocity
-        this.height = 150
-        this.width = 50
-        this.lastKey
-        this.health = 100
-        this.attackBox = {
-            position: {
-                x: this.position.x,
-                y: this.position.y
-            },
-            offset,
-            width: 100,
-            height: 50,
-        }
-        this.color = color
-        this.isAttacking
-
-    }
-
-    draw() {
-        c.fillStyle = this.color
-        c.fillRect(this.position.x, this.position.y, this.width, this.height) //draws a player on the screen with arguments from player object
-
-
-
-        //attack box
-        if (this.isAttacking) {
-            c.fillStyle = 'white'
-            c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-        }
-
-
-    }
-
-    update() {
-        this.draw()
-
-        this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-        this.attackBox.position.y = this.position.y
-
-        this.position.x += this.velocity.x
-        this.position.y += this.velocity.y
-
-        if (this.position.y + this.height + this.velocity.y >= canvas.height) {     //stops player from going beyond canvas height
-            this.velocity.y = 0
-        } else {
-            this.velocity.y += gravity
-        }
-
-        // map boundaries
-        if (player.position.x >= canvas.width - player.width) {
-            player.position.x = canvas.width - player.width
-        }
-        if (enemy.position.x >= canvas.width - enemy.width) {
-            enemy.position.x = canvas.width - enemy.width
-        }
-        if (player.position.x <= 0) {
-            player.position.x = 0
-        }
-        if (enemy.position.x <= 0) {
-            enemy.position.x = 0
-        }
-    }
-
-    attack() {
-        this.isAttacking = true
-        setTimeout(() => {
-            this.isAttacking = false
-        }, 100)
-    }
-}
-
-const player = new Sprite({
+const background1 = new Sprite({
     position: {
-        x: 100,
+        x: 0,
+        y: -22
+    },
+    imageSrc: './img/parallax-mountain-bg.png',
+    scale: 3.8
+})
+const background2 = new Sprite({
+    position: {
+        x: 0,
+        y: -6
+    },
+    imageSrc: './img/parallax-mountain-foreground-trees.png',
+    scale: 3.3
+})
+const background3 = new Sprite({
+    position: {
+        x: 0,
+        y: 100
+    },
+    imageSrc: './img/parallax-mountain-montain-far.png',
+    scale: 3
+})
+const background4 = new Sprite({
+    position: {
+        x: 0,
+        y: 0
+    },
+    imageSrc: './img/parallax-mountain-mountains.png',
+    scale: 3.3
+})
+
+const background5 = new Sprite({
+    position: {
+        x: 0,
+        y: -305
+    },
+    imageSrc: './img/Layer_0000_9.png',
+    scale: 1.11
+})
+const background6 = new Sprite({
+    position: {
+        x: 0,
+        y: 50
+    },
+    imageSrc: './img/parallax-mountain-trees.png',
+    scale: 3
+})
+const background7 = new Sprite({
+    position: {
+        x: 0,
+        y: -305
+    },
+    imageSrc: './img/Layer_0001_8.png',
+    scale: 1.11
+})
+
+
+
+const player = new Player({
+    position: {
+        x: 50,
         y: 0
     },
     velocity: {
@@ -99,9 +84,9 @@ const player = new Sprite({
 })
 
 
-const enemy = new Sprite({
+const enemy = new Player({
     position: {
-        x: 874,
+        x: 824,
         y: 0
     },
     velocity: {
@@ -176,6 +161,13 @@ function animate() {
     window.requestAnimationFrame(animate)
     c.fillStyle = 'black'
     c.fillRect(0, 0, canvas.width, canvas.height)
+    background1.update()
+    background4.update()
+    background3.update()
+    background6.update()
+    background2.update()
+    background7.update()
+    background5.update()
 
     player.update()
     enemy.update()
