@@ -8,64 +8,14 @@ c.fillRect(0, 0, canvas.width, canvas.height) //takes arguments (x position, y p
 
 const gravity = 0.7
 
-const background1 = new Sprite({
-    position: {
-        x: 0,
-        y: -22
-    },
-    imageSrc: './img/parallax-mountain-bg.png',
-    scale: 3.8
-})
-const background5 = new Sprite({
-    position: {
-        x: 0,
-        y: -6
-    },
-    imageSrc: './img/parallax-mountain-foreground-trees.png',
-    scale: 3.3
-})
-const background3 = new Sprite({
-    position: {
-        x: 0,
-        y: 100
-    },
-    imageSrc: './img/parallax-mountain-montain-far.png',
-    scale: 3
-})
-const background2 = new Sprite({
+const background = new Sprite({
     position: {
         x: 0,
         y: 0
     },
-    imageSrc: './img/parallax-mountain-mountains.png',
-    scale: 3.3
+    imageSrc: './img/backgroundImageMain.png',
+    scale: 1
 })
-
-const background7 = new Sprite({
-    position: {
-        x: 0,
-        y: -305
-    },
-    imageSrc: './img/Layer_0000_9.png',
-    scale: 1.11
-})
-const background4 = new Sprite({
-    position: {
-        x: 0,
-        y: 50
-    },
-    imageSrc: './img/parallax-mountain-trees.png',
-    scale: 3
-})
-const background6 = new Sprite({
-    position: {
-        x: 0,
-        y: -305
-    },
-    imageSrc: './img/Layer_0001_8.png',
-    scale: 1.11
-})
-
 
 
 const player = new Player({
@@ -86,7 +36,7 @@ const player = new Player({
 
 const enemy = new Player({
     position: {
-        x: 824,
+        x: 924,
         y: 0
     },
     velocity: {
@@ -161,13 +111,8 @@ function animate() {
     window.requestAnimationFrame(animate)
     c.fillStyle = 'black'
     c.fillRect(0, 0, canvas.width, canvas.height)
-    background1.update()
-    background2.update()
-    background3.update()
-    background4.update()
-    background5.update()
-    background6.update()
-    background7.update()
+
+    background.update()
 
     player.update()
     enemy.update()
