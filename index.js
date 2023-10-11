@@ -14,8 +14,18 @@ const background = new Sprite({
         y: 0
     },
     imageSrc: './img/backgroundImageMain.png',
-    scale: 1
+    scale: 1.12
 })
+
+// const shop = new Sprite({
+//     position: {
+//         x: 765,
+//         y: 380
+//     },
+//     imageSrc: './img/move.png',
+//     scale: 5,
+//     framesMax: 18
+// })
 
 
 const player = new Player({
@@ -30,6 +40,13 @@ const player = new Player({
     offset: {
         x: 0,
         y: 0
+    },
+    scale: 2.5,
+    imageSrc: './img/ObiWan-Idle.png',
+    framesMax: 9,
+    offset: {
+        x: 0,
+        y: 50
     }
 })
 
@@ -113,6 +130,7 @@ function animate() {
     c.fillRect(0, 0, canvas.width, canvas.height)
 
     background.update()
+    // shop.update()
 
     player.update()
     enemy.update()
