@@ -38,11 +38,22 @@ const player = new Player({
         y: 0
     },
     scale: 3.2,
+
+    offset: {
+        x: 190,
+        y: 223
+    },
     imageSrc: './img/Players/warrior/Idle.png',
     framesMax: 10,
-    offset: {
-        x: 200,
-        y: 170
+    sprites: {
+        idle: {
+            imageSrc: './img/warrior/Idle.png',
+            framesMax: 10
+        },
+        run: {
+            imageSrc: './img/warrior/Run.png',
+            framesMax: 8
+        }
     }
 })
 const enemy = new Player({
@@ -59,7 +70,17 @@ const enemy = new Player({
     framesMax: 8,
     offset: {
         x: 200,
-        y: 265
+        y: 320
+    },
+    sprites: {
+        idle: {
+            imageSrc: './img/wizard/Idle.png',
+            framesMax: 10
+        },
+        run: {
+            imageSrc: './img/wizard/Run.png',
+            framesMax: 8
+        }
     }
 })
 
@@ -153,28 +174,37 @@ function animate() {
 
 
     //player movement
+    player.image = player.sprites.idle.image
+    player.framesMax = player.sprites.idle.framesMax
+
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
-        // dplayer.attackBox.offset.x = -50
+        // player.attackBox.offset.x = -50
+        player.image = player.sprites.run.image
+        player.framesMax = player.sprites.run.framesMax
 
-        console.log('position: ' + player.position.x)
-        console.log('offset: ' + player.offset.x)
+
+
 
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
-        // dplayer.attackBox.offset.x = player.width - 50
-        console.log('position: ' + player.position.x)
-        console.log('offset: ' + player.offset.x)
+        // player.attackBox.offset.x = player.width - 50
+        player.image = player.sprites.run.image
+        player.framesMax = player.sprites.run.framesMax
+
 
     }
 
     //enemy movement
+    enemy.image = enemy.sprites.idle.image
     if (keys.j.pressed && enemy.lastKey === 'j') {
         enemy.velocity.x = -5
+        enemy.image = enemy.sprites.run.image
         // enemy.attackBox.offset.x = -50
     } else if (keys.l.pressed && enemy.lastKey === 'l') {
         enemy.velocity.x = 5
         // enemy.attackBox.offset.x = enemy.width - 50
+        enemy.image = enemy.sprites.run.image
     }
 
     //attack collision 

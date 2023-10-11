@@ -1,5 +1,11 @@
 class Sprite {
-    constructor({ position, imageSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 } }) {
+    constructor({
+        position,
+        imageSrc,
+        scale = 1,
+        framesMax = 1,
+        offset = { x: 0, y: 0 }
+    }) {
         this.position = position
         this.height = 150
         this.width = 50
@@ -27,9 +33,7 @@ class Sprite {
         )
     }
 
-
-    update() {
-        this.draw()
+    animateFrames() {
         this.framesElapsed++
         if (this.framesElapsed % this.framesHold === 0) {
             if (this.frameCurrent < this.framesMax - 1) {
@@ -38,13 +42,24 @@ class Sprite {
                 this.frameCurrent = 0
             }
         }
+    }
 
-
+    update() {
+        this.draw()
+        this.animateFrames()
     }
 }
 
 class Player extends Sprite {
-    constructor({ position, velocity, color = 'blue', offset = { x: 0, y: 0 }, imageSrc, scale = 1, framesMax = 1 }) {
+    constructor({ position,
+        velocity,
+        color = 'blue',
+        offset = { x: 0, y: 0 },
+        imageSrc,
+        scale = 1,
+        framesMax = 1,
+        sprites
+    }) {
         super({
             imageSrc,
             scale,
@@ -74,7 +89,15 @@ class Player extends Sprite {
         this.isAttacking
         this.frameCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 7
+        this.framesHold = 10
+        this.sprites = sprites
+
+        for (const sprite in this.sprites) {
+            sprites[sprite].image = new Image()
+            sprites[sprite].image.src = sprites[sprite].imageSrc
+        }
+
+        console.log(this.sprites)
 
     }
 
@@ -100,14 +123,7 @@ class Player extends Sprite {
 
     update() {
         this.draw()
-        this.framesElapsed++
-        if (this.framesElapsed % this.framesHold === 0) {
-            if (this.frameCurrent < this.framesMax - 1) {
-                this.frameCurrent++
-            } else {
-                this.frameCurrent = 0
-            }
-        }
+        this.animateFrames()
 
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
         this.attackBox.position.y = this.position.y
