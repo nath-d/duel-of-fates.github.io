@@ -58,7 +58,7 @@ class Player extends Sprite {
         this.position = position
         this.velocity = velocity
         this.height = 150
-        this.width = 50
+        this.width = 200
         this.lastKey
         this.health = 100
         this.attackBox = {
@@ -122,17 +122,18 @@ class Player extends Sprite {
         }
 
         // map boundaries
-        if (player.position.x >= canvas.width - player.width) {
-            player.position.x = canvas.width - player.width
+        if (player.position.x + (player.offset.x / 2) >= canvas.width) {
+            player.position.x = canvas.width - ((player.offset.x / 2) + 10)
+
         }
-        if (enemy.position.x >= canvas.width - enemy.width) {
-            enemy.position.x = canvas.width - enemy.width
+        if (enemy.position.x + (enemy.offset.x) >= canvas.width) {
+            enemy.position.x = canvas.width - (enemy.offset.x + 10)
         }
         if (player.position.x <= 0) {
             player.position.x = 0
         }
-        if (enemy.position.x <= 0) {
-            enemy.position.x = 0
+        if (enemy.position.x + (enemy.offset.x / 2) <= 0) {
+            enemy.position.x = 0 - ((enemy.offset.x / 2 - 10))
         }
 
     }

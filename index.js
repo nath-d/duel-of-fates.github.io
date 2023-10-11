@@ -30,7 +30,7 @@ const background = new Sprite({
 
 const player = new Player({
     position: {
-        x: 50,
+        x: 0,
         y: 0
     },
     velocity: {
@@ -41,13 +41,13 @@ const player = new Player({
     imageSrc: './img/Players/warrior/Idle.png',
     framesMax: 10,
     offset: {
-        x: 215,
+        x: 200,
         y: 170
     }
 })
 const enemy = new Player({
     position: {
-        x: 924,
+        x: 824,
         y: 0
     },
     velocity: {
@@ -58,7 +58,7 @@ const enemy = new Player({
     imageSrc: './img/Players/wizard/Idle.png',
     framesMax: 8,
     offset: {
-        x: 215,
+        x: 200,
         y: 265
     }
 })
@@ -136,7 +136,6 @@ function decreaseTimer() {
 decreaseTimer()
 
 
-
 function animate() {
     window.requestAnimationFrame(animate)
     c.fillStyle = 'black'
@@ -156,22 +155,26 @@ function animate() {
     //player movement
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
-        player.attackBox.offset.x = -50
-        console.log(player.position.x)
+        // dplayer.attackBox.offset.x = -50
+
+        console.log('position: ' + player.position.x)
+        console.log('offset: ' + player.offset.x)
 
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
-        player.attackBox.offset.x = player.width - 50
-        console.log(player.position.x)
+        // dplayer.attackBox.offset.x = player.width - 50
+        console.log('position: ' + player.position.x)
+        console.log('offset: ' + player.offset.x)
+
     }
 
     //enemy movement
     if (keys.j.pressed && enemy.lastKey === 'j') {
         enemy.velocity.x = -5
-        enemy.attackBox.offset.x = -50
+        // enemy.attackBox.offset.x = -50
     } else if (keys.l.pressed && enemy.lastKey === 'l') {
         enemy.velocity.x = 5
-        enemy.attackBox.offset.x = enemy.width - 50
+        // enemy.attackBox.offset.x = enemy.width - 50
     }
 
     //attack collision 
