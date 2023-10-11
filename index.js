@@ -37,20 +37,14 @@ const player = new Player({
         x: 0,
         y: 0
     },
+    scale: 3.2,
+    imageSrc: './img/Players/warrior/Idle.png',
+    framesMax: 10,
     offset: {
-        x: 0,
-        y: 0
-    },
-    scale: 2.5,
-    imageSrc: './img/ObiWan-Idle.png',
-    framesMax: 9,
-    offset: {
-        x: 0,
-        y: 50
+        x: 215,
+        y: 170
     }
 })
-
-
 const enemy = new Player({
     position: {
         x: 924,
@@ -60,12 +54,31 @@ const enemy = new Player({
         x: 0,
         y: 0
     },
+    scale: 2.5,
+    imageSrc: './img/Players/wizard/Idle.png',
+    framesMax: 8,
     offset: {
-        x: -50,
-        y: 0
-    },
-    color: 'red'
+        x: 215,
+        y: 265
+    }
 })
+
+
+// const enemy = new Player({
+//     position: {
+//         x: 924,
+//         y: 0
+//     },
+//     velocity: {
+//         x: 0,
+//         y: 0
+//     },
+//     offset: {
+//         x: -50,
+//         y: 0
+//     },
+//     color: 'red'
+// })
 
 
 const keys = {
@@ -144,10 +157,12 @@ function animate() {
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
         player.attackBox.offset.x = -50
+        console.log(player.position.x)
 
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
         player.attackBox.offset.x = player.width - 50
+        console.log(player.position.x)
     }
 
     //enemy movement
@@ -247,3 +262,7 @@ window.addEventListener('keyup', (event) => {
             break
     }
 })
+
+
+
+console.log(enemy.position.x)

@@ -134,6 +134,7 @@ class Player extends Sprite {
         if (enemy.position.x <= 0) {
             enemy.position.x = 0
         }
+
     }
 
     attack() {
