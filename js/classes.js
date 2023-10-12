@@ -15,7 +15,7 @@ class Sprite {
         this.framesMax = framesMax
         this.frameCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 5
+        this.framesHold = 20
         this.offset = offset
     }
 
@@ -152,11 +152,12 @@ class Player extends Sprite {
         if (enemy.position.x + (enemy.offset.x / 2) <= 0) {
             enemy.position.x = 0 - ((enemy.offset.x / 2 - 10))
         }
-        this.switchSprite('idle')
+
 
     }
 
     attack() {
+        this.switchSprite('attack1')
         this.isAttacking = true
         setTimeout(() => {
             this.isAttacking = false
@@ -164,6 +165,9 @@ class Player extends Sprite {
     }
 
     switchSprite(sprite) {
+        if (this.image === this.sprites.attack1.image &&
+            this.frameCurrent < this.sprites.attack1.framesMax - 1) return
+
         switch (sprite) {
             case 'idle':
                 if (this.image !== this.sprites.idle.image) {
@@ -187,6 +191,12 @@ class Player extends Sprite {
                 if (this.image !== this.sprites.fall.image) {
                     this.image = this.sprites.fall.image
                     this.framesMax = this.sprites.fall.framesMax
+                }
+                break;
+            case 'attack1':
+                if (this.image !== this.sprites.attack1.image) {
+                    this.image = this.sprites.attack1.image
+                    this.framesMax = this.sprites.attack1.framesMax
                 }
                 break;
 

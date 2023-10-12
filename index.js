@@ -61,6 +61,10 @@ const player = new Player({
         fall: {
             imageSrc: './img/warrior/Fall.png',
             framesMax: 3
+        },
+        attack1: {
+            imageSrc: './img/warrior/Attack3.png',
+            framesMax: 8
         }
     }
 })
@@ -96,6 +100,10 @@ const enemy = new Player({
         fall: {
             imageSrc: './img/wizard/Fall.png',
             framesMax: 2
+        },
+        attack1: {
+            imageSrc: './img/wizard/Attack1.png',
+            framesMax: 8
         }
     }
 })
@@ -282,7 +290,7 @@ window.addEventListener('keydown', (event) => {
         case 'w':
             player.velocity.y = -20
             break
-        case ' ':
+        case 's':
             player.attack()
             break
 
