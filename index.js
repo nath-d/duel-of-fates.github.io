@@ -53,6 +53,10 @@ const player = new Player({
         run: {
             imageSrc: './img/warrior/Run.png',
             framesMax: 8
+        },
+        jump: {
+            imageSrc: './img/warrior/Jump.png',
+            framesMax: 3
         }
     }
 })
@@ -80,6 +84,10 @@ const enemy = new Player({
         run: {
             imageSrc: './img/wizard/Run.png',
             framesMax: 8
+        },
+        jump: {
+            imageSrc: './img/wizard/Jump.png',
+            framesMax: 2
         }
     }
 })
@@ -172,39 +180,39 @@ function animate() {
     player.velocity.x = 0
     enemy.velocity.x = 0
 
-
     //player movement
-    player.image = player.sprites.idle.image
-    player.framesMax = player.sprites.idle.framesMax
+    player.switchSprite('idle')
+
+    if (player.velocity.y < 0) {
+        player.switchSprite('jump')
+    }
+
 
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
+        player.switchSprite('run')
         // player.attackBox.offset.x = -50
-        player.image = player.sprites.run.image
-        player.framesMax = player.sprites.run.framesMax
-
-
-
-
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
         // player.attackBox.offset.x = player.width - 50
-        player.image = player.sprites.run.image
-        player.framesMax = player.sprites.run.framesMax
-
-
+        player.switchSprite('run')
     }
 
     //enemy movement
     enemy.image = enemy.sprites.idle.image
+    if (enemy.velocity.y < 0) {
+        enemy.switchSprite('jump')
+    }
+
+
     if (keys.j.pressed && enemy.lastKey === 'j') {
         enemy.velocity.x = -5
-        enemy.image = enemy.sprites.run.image
+        enemy.switchSprite('run')
         // enemy.attackBox.offset.x = -50
     } else if (keys.l.pressed && enemy.lastKey === 'l') {
         enemy.velocity.x = 5
         // enemy.attackBox.offset.x = enemy.width - 50
-        enemy.image = enemy.sprites.run.image
+        enemy.switchSprite('run')
     }
 
     //attack collision 
@@ -295,7 +303,3 @@ window.addEventListener('keyup', (event) => {
             break
     }
 })
-
-
-
-console.log(enemy.position.x)

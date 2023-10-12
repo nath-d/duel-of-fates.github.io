@@ -15,7 +15,7 @@ class Sprite {
         this.framesMax = framesMax
         this.frameCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 7
+        this.framesHold = 10
         this.offset = offset
     }
 
@@ -159,5 +159,29 @@ class Player extends Sprite {
         setTimeout(() => {
             this.isAttacking = false
         }, 100)
+    }
+
+    switchSprite(sprite) {
+        switch (sprite) {
+            case 'idle':
+                if (this.image !== this.sprites.idle.image) {
+                    this.image = this.sprites.idle.image
+                    this.framesMax = this.sprites.idle.framesMax
+                }
+                break;
+            case 'run':
+                if (this.image !== this.sprites.run.image) {
+                    this.image = this.sprites.run.image
+                    this.framesMax = this.sprites.run.framesMax
+                }
+                break;
+            case 'jump':
+                if (this.image !== this.sprites.jump.image) {
+                    this.image = this.sprites.jump.image
+                    this.framesMax = this.sprites.jump.framesMax
+                }
+                break;
+        }
+
     }
 }
