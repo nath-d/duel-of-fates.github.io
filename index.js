@@ -66,6 +66,14 @@ const player = new Player({
             imageSrc: './img/warrior/Attack3.png',
             framesMax: 8
         }
+    },
+    attackBox: {
+        offset: {
+            x: 100,
+            y: 0
+        },
+        width: 100,
+        height: 50
     }
 })
 const enemy = new Player({
@@ -105,6 +113,14 @@ const enemy = new Player({
             imageSrc: './img/wizard/Attack1.png',
             framesMax: 8
         }
+    },
+    attackBox: {
+        offset: {
+            x: 0,
+            y: 0
+        },
+        width: 100,
+        height: 50
     }
 })
 
@@ -250,7 +266,7 @@ function animate() {
         rect1: player,
         rect2: enemy
     }) &&
-        player.isAttacking) {
+        player.isAttacking && player.frameCurrent === 4) {
 
         player.isAttacking = false
         enemy.health -= 20
@@ -261,13 +277,23 @@ function animate() {
         rect1: enemy,
         rect2: player
     }) &&
-        enemy.isAttacking) {
+        enemy.isAttacking && enemy.frameCurrent === 4) {
 
         enemy.isAttacking = false
         player.health -= 20
         document.querySelector('#playerHealth').style.width = player.health + '%'
         console.log("enemy attack")
     }
+
+    //player miss
+    if (player.isAttacking && player.frameCurrent === 4) {
+        player.isAttacking = false
+    }
+    if (enemy.isAttacking && enemy.frameCurrent === 4) {
+        enemy.isAttacking = false
+    }
+
+
 
     // game end
     if (enemy.health <= 0 || player.health <= 0) {

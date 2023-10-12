@@ -15,7 +15,7 @@ class Sprite {
         this.framesMax = framesMax
         this.frameCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 20
+        this.framesHold = 5
         this.offset = offset
     }
 
@@ -58,7 +58,8 @@ class Player extends Sprite {
         imageSrc,
         scale = 1,
         framesMax = 1,
-        sprites
+        sprites,
+        attackBox = { offset: {}, width: undefined, height: undefined }
     }) {
         super({
             imageSrc,
@@ -81,9 +82,9 @@ class Player extends Sprite {
                 x: this.position.x,
                 y: this.position.y
             },
-            offset,
-            width: 100,
-            height: 50,
+            offset: attackBox.offset,
+            width: attackBox.width,
+            height: attackBox.height,
         }
         this.color = color
         this.isAttacking
@@ -124,6 +125,9 @@ class Player extends Sprite {
     update() {
         this.draw()
         this.animateFrames()
+        // c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
+
+
 
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
         this.attackBox.position.y = this.position.y
@@ -159,9 +163,9 @@ class Player extends Sprite {
     attack() {
         this.switchSprite('attack1')
         this.isAttacking = true
-        setTimeout(() => {
-            this.isAttacking = false
-        }, 100)
+        // setTimeout(() => {
+        //     this.isAttacking = false
+        // }, 100)
     }
 
     switchSprite(sprite) {
