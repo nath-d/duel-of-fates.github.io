@@ -15,7 +15,7 @@ class Sprite {
         this.framesMax = framesMax
         this.frameCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 10
+        this.framesHold = 5
         this.offset = offset
     }
 
@@ -133,6 +133,7 @@ class Player extends Sprite {
 
         if (this.position.y + this.height + this.velocity.y >= canvas.height) {     //stops player from going beyond canvas height
             this.velocity.y = 0
+            this.position.y = 426.30
         } else {
             this.velocity.y += gravity
         }
@@ -151,6 +152,7 @@ class Player extends Sprite {
         if (enemy.position.x + (enemy.offset.x / 2) <= 0) {
             enemy.position.x = 0 - ((enemy.offset.x / 2 - 10))
         }
+        this.switchSprite('idle')
 
     }
 
@@ -181,6 +183,13 @@ class Player extends Sprite {
                     this.framesMax = this.sprites.jump.framesMax
                 }
                 break;
+            case 'fall':
+                if (this.image !== this.sprites.fall.image) {
+                    this.image = this.sprites.fall.image
+                    this.framesMax = this.sprites.fall.framesMax
+                }
+                break;
+
         }
 
     }

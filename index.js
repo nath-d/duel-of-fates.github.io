@@ -57,6 +57,10 @@ const player = new Player({
         jump: {
             imageSrc: './img/warrior/Jump.png',
             framesMax: 3
+        },
+        fall: {
+            imageSrc: './img/warrior/Fall.png',
+            framesMax: 3
         }
     }
 })
@@ -79,7 +83,7 @@ const enemy = new Player({
     sprites: {
         idle: {
             imageSrc: './img/wizard/Idle.png',
-            framesMax: 10
+            framesMax: 8
         },
         run: {
             imageSrc: './img/wizard/Run.png',
@@ -87,6 +91,10 @@ const enemy = new Player({
         },
         jump: {
             imageSrc: './img/wizard/Jump.png',
+            framesMax: 2
+        },
+        fall: {
+            imageSrc: './img/wizard/Fall.png',
             framesMax: 2
         }
     }
@@ -176,16 +184,15 @@ function animate() {
     player.update()
     enemy.update()
 
+
     //Stops moving player for every frame
     player.velocity.x = 0
     enemy.velocity.x = 0
 
     //player movement
-    player.switchSprite('idle')
 
-    if (player.velocity.y < 0) {
-        player.switchSprite('jump')
-    }
+
+
 
 
     if (keys.a.pressed && player.lastKey === 'a') {
@@ -196,13 +203,19 @@ function animate() {
         player.velocity.x = 5
         // player.attackBox.offset.x = player.width - 50
         player.switchSprite('run')
+    } else {
+        player.switchSprite('idle')
+    }
+    if (player.velocity.y < 0) {
+        player.switchSprite('jump')
+    } else if (player.velocity.y > 0) {
+        player.switchSprite('fall')
+
     }
 
     //enemy movement
-    enemy.image = enemy.sprites.idle.image
-    if (enemy.velocity.y < 0) {
-        enemy.switchSprite('jump')
-    }
+
+
 
 
     if (keys.j.pressed && enemy.lastKey === 'j') {
@@ -213,6 +226,15 @@ function animate() {
         enemy.velocity.x = 5
         // enemy.attackBox.offset.x = enemy.width - 50
         enemy.switchSprite('run')
+    } else {
+        enemy.switchSprite('idle')
+    }
+
+    if (enemy.velocity.y < 0) {
+        enemy.switchSprite('jump')
+    } else if (enemy.velocity.y > 0) {
+        enemy.switchSprite('fall')
+
     }
 
     //attack collision 
