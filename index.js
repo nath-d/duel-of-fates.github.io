@@ -315,40 +315,45 @@ function animate() {
 animate() //loop
 
 window.addEventListener('keydown', (event) => {
-    switch (event.key) {
-        case 'd':
-            keys.d.pressed = true
-            player.lastKey = 'd'
-            break
-        case 'a':
-            keys.a.pressed = true
-            player.lastKey = 'a'
-            break
-        case 'w':
-            player.velocity.y = -20
-            break
-        case 's':
-            player.attack()
-            break
+    if (!player.dead) {
+        switch (event.key) {
+            case 'd':
+                keys.d.pressed = true
+                player.lastKey = 'd'
+                break
+            case 'a':
+                keys.a.pressed = true
+                player.lastKey = 'a'
+                break
+            case 'w':
+                player.velocity.y = -20
+                break
+            case 's':
+                player.attack()
+                break
 
+        }
     }
-    switch (event.key) {
-        case 'l':
-            keys.l.pressed = true
-            enemy.lastKey = 'l'
-            break
-        case 'j':
-            keys.j.pressed = true
-            enemy.lastKey = 'j'
-            break
-        case 'i':
-            enemy.velocity.y = -20
-            break
-        case 'k':
-            enemy.attack()
-            break
+    if (!enemy.dead) {
+        switch (event.key) {
+            case 'l':
+                keys.l.pressed = true
+                enemy.lastKey = 'l'
+                break
+            case 'j':
+                keys.j.pressed = true
+                enemy.lastKey = 'j'
+                break
+            case 'i':
+                enemy.velocity.y = -20
+                break
+            case 'k':
+                enemy.attack()
+                break
 
+        }
     }
+
 
 })
 
