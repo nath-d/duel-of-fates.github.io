@@ -41,7 +41,7 @@ const player = new Player({
 
     offset: {
         x: 190,
-        y: 223
+        y: 225
     },
     imageSrc: './img/Players/warrior/Idle.png',
     framesMax: 10,
@@ -187,12 +187,10 @@ function collision({ rect1, rect2 }) {
 function winnerDeterminer({ player, enemy, timerId }) {
     clearTimeout(timerId)
     document.querySelector('#displayText').style.display = 'flex'
-    if (player.health > 0 && enemy.health > 0) {
-        document.querySelector('#displayText').innerHTML = 'Tie'
-    } else if (player.health > enemy.health) {
-        document.querySelector('#displayText').innerHTML = 'Player 1 wins'
-    } else if (enemy.health > player.health) {
-        document.querySelector('#displayText').innerHTML = 'Player 2 wins'
+    if (player.dead) {
+        document.querySelector('#displayText').innerHTML = 'Wizard victory'
+    } else if (enemy.dead) {
+        document.querySelector('#displayText').innerHTML = 'Warrior victory'
     }
 }
 
@@ -220,6 +218,9 @@ function animate() {
     c.fillRect(0, 0, canvas.width, canvas.height)
 
     background.update()
+    c.fillStyle = 'rgba(255,255,255, 0.14)'
+    c.fillRect(0, 0, canvas.width, canvas.height)
+
     // shop.update()
 
     player.update()
@@ -279,7 +280,10 @@ function animate() {
         enemy.takeHit()
         player.isAttacking = false
         // enemy.health -= 20
-        document.querySelector('#enemyHealth').style.width = enemy.health + '%'
+
+        gsap.to('#enemyHealth', {
+            width: enemy.health + '%'
+        })// document.querySelector('#enemyHealth').style.width = enemy.health + '%'
         console.log("player attack")
     }
     if (collision({
@@ -292,7 +296,10 @@ function animate() {
         player.takeHit()
         enemy.isAttacking = false
         // player.health -= 20
-        document.querySelector('#playerHealth').style.width = player.health + '%'
+        // document.querySelector('#playerHealth').style.width = player.health + '%'
+        gsap.to('#playerHealth', {
+            width: player.health + '%'
+        })
         console.log("enemy attack")
     }
 
