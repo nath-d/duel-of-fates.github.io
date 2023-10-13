@@ -63,12 +63,16 @@ const player = new Player({
             framesMax: 3
         },
         attack1: {
-            imageSrc: './img/warrior/Attack3.png',
-            framesMax: 8
+            imageSrc: './img/warrior/Attack2.png',
+            framesMax: 7
         },
         takeHit: {
             imageSrc: './img/warrior/Take hit.png',
             framesMax: 3
+        },
+        death: {
+            imageSrc: './img/warrior/Death.png',
+            framesMax: 7
         }
     },
     attackBox: {
@@ -120,6 +124,11 @@ const enemy = new Player({
         takeHit: {
             imageSrc: './img/wizard/Take hit.png',
             framesMax: 3
+        },
+        death: {
+            imageSrc: './img/wizard/Death2.png',
+            framesMax: 7
+
         }
     },
     attackBox: {
@@ -222,11 +231,6 @@ function animate() {
     enemy.velocity.x = 0
 
     //player movement
-
-
-
-
-
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
         player.switchSprite('run')
@@ -246,10 +250,6 @@ function animate() {
     }
 
     //enemy movement
-
-
-
-
     if (keys.j.pressed && enemy.lastKey === 'j') {
         enemy.velocity.x = -5
         enemy.switchSprite('run')
