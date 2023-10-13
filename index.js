@@ -65,6 +65,10 @@ const player = new Player({
         attack1: {
             imageSrc: './img/warrior/Attack3.png',
             framesMax: 8
+        },
+        takeHit: {
+            imageSrc: './img/warrior/Take hit.png',
+            framesMax: 3
         }
     },
     attackBox: {
@@ -112,6 +116,10 @@ const enemy = new Player({
         attack1: {
             imageSrc: './img/wizard/Attack1.png',
             framesMax: 8
+        },
+        takeHit: {
+            imageSrc: './img/wizard/Take hit.png',
+            framesMax: 3
         }
     },
     attackBox: {
@@ -268,8 +276,9 @@ function animate() {
     }) &&
         player.isAttacking && player.frameCurrent === 4) {
 
+        enemy.takeHit()
         player.isAttacking = false
-        enemy.health -= 20
+        // enemy.health -= 20
         document.querySelector('#enemyHealth').style.width = enemy.health + '%'
         console.log("player attack")
     }
@@ -279,8 +288,10 @@ function animate() {
     }) &&
         enemy.isAttacking && enemy.frameCurrent === 4) {
 
+
+        player.takeHit()
         enemy.isAttacking = false
-        player.health -= 20
+        // player.health -= 20
         document.querySelector('#playerHealth').style.width = player.health + '%'
         console.log("enemy attack")
     }
