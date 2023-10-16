@@ -102,27 +102,6 @@ class Player extends Sprite {
         console.log(this.sprites)
 
     }
-
-    // draw() {
-    //     c.fillStyle = this.color
-    //     c.fillRect(this.position.x, this.position.y, this.width, this.height) //draws a player on the screen with arguments from player object
-    //     // c.drawImage(
-    //     //     this.image,
-    //     //     this.position.x,
-    //     //     this.position.y,
-    //     // )
-
-
-
-    //     //attack box
-    //     if (this.isAttacking) {
-    //         c.fillStyle = 'white'
-    //         c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-    //     }
-
-
-    // }
-
     update() {
         this.draw()
         if (this.dead != true) this.animateFrames()
@@ -245,7 +224,6 @@ class Player extends Sprite {
                     this.frameCurrent = 0
                 }
                 break;
-
         }
 
     }

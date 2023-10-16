@@ -17,17 +17,6 @@ const background = new Sprite({
     scale: 1.12
 })
 
-// const shop = new Sprite({
-//     position: {
-//         x: 765,
-//         y: 380
-//     },
-//     imageSrc: './img/move.png',
-//     scale: 5,
-//     framesMax: 18
-// })
-
-
 const player = new Player({
     position: {
         x: 0,
@@ -84,6 +73,8 @@ const player = new Player({
         height: 50
     }
 })
+
+//test
 const enemy = new Player({
     position: {
         x: 824,
@@ -140,25 +131,6 @@ const enemy = new Player({
         height: 50
     }
 })
-
-
-// const enemy = new Player({
-//     position: {
-//         x: 924,
-//         y: 0
-//     },
-//     velocity: {
-//         x: 0,
-//         y: 0
-//     },
-//     offset: {
-//         x: -50,
-//         y: 0
-//     },
-//     color: 'red'
-// })
-
-
 const keys = {
     a: {
         pressed: false
@@ -291,8 +263,6 @@ function animate() {
         rect2: player
     }) &&
         enemy.isAttacking && enemy.frameCurrent === 4) {
-
-
         player.takeHit()
         enemy.isAttacking = false
         // player.health -= 20
@@ -310,9 +280,6 @@ function animate() {
     if (enemy.isAttacking && enemy.frameCurrent === 4) {
         enemy.isAttacking = false
     }
-
-
-
     // game end
     if (enemy.health <= 0 || player.health <= 0) {
         winnerDeterminer({ player, enemy, timerId })
